@@ -28,7 +28,8 @@ if prompt := st.chat_input("How can I help you?"):
 
     # Generate Gemini Response
     with st.chat_message("assistant"):
-        response = model.generate_content(prompt)
+        response = model.generate_content("“You are a high school math tutor. Do not give direct answers unless the student has tried. Ask guiding questions, provide hints, and encourage step-by-step reasoning.” + 
+prompt)
         st.markdown(response.text)
     
     # Add assistant response to state
