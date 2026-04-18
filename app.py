@@ -2,11 +2,11 @@ import streamlit as st
 import google.generativeai as genai
 import os
 
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 model = genai.GenerativeModel('gemini-1.5-flash')
 
 st.set_page_config(page_title="Gemini Chat", layout="centered")
-st.title("💬 Gemini Assistant")
+st.title("TITLE")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -16,19 +16,20 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 if prompt := st.chat_input("How can I help you?"):
-    st.markdown(prompt)
     st.session_state.messages.append({"role": "user", "content": prompt})
 
     with st.chat_message("user"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        response = model.generate_content(
-            "You are a high school math tutor. "
-            "Do not give direct answers unless the student has tried. "
-            "Ask guiding questions and give hints.\n\n"
-            + prompt
-        )
-        st.markdown(response.text + "HI")
+        try:
+            response = model.generate_content(
+                "You are a high school math tutor. Do not give direct answers unless the student has tried. Ask guiding questions and give hints.\n\n" + prompt
+            )
+            reply = response.text if response.text else "No response."
+            st.markdown(reply)
+        except Exception as e:
+            st.error(f"Error: {e}")
+            reply = "Error occurred."
 
     st.session_state.messages.append({"role": "assistant", "content": response.text})
