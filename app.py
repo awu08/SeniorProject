@@ -8,7 +8,8 @@ model = genai.GenerativeModel('gemini-1.5-flash')
 st.set_page_config(page_title="Gemini Chat", layout="centered")
 st.title("💬 Gemini Assistant")
 
-st.markdown("HI")
+st.chat_message("assistant"):
+    st.markdown("HI")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
