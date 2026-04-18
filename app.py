@@ -15,6 +15,15 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
+client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
+
+models = client.models.list()
+
+with st.chat_message("assistant"):
+    for model in models:
+        print(model.name)
+
+
 if prompt := st.chat_input("How can I help you?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
 
