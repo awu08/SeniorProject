@@ -1,10 +1,9 @@
 import streamlit as st
-from google import genai
-# import google.generativeai as genai
+import google.generativeai as genai
 import os
 
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('gemini-2.5-flash')
 
 st.set_page_config(page_title="Gemini Chat", layout="centered")
 st.title("TITLE")
@@ -15,15 +14,6 @@ if "messages" not in st.session_state:
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
-
-client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
-
-models = client.models.list()
-
-with st.chat_message("assistant"):
-    for model in models:
-        print(model.name)
-
 
 if prompt := st.chat_input("How can I help you?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
