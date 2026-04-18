@@ -1,6 +1,6 @@
 import streamlit as st
-from google import genai as gen
-import google.generativeai as genai
+from google import genai
+# import google.generativeai as genai
 import os
 
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
@@ -16,7 +16,7 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-client = gen.Client(api_key=st.secrets["GEMINI_API_KEY"])
+client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
 
 models = client.models.list()
 
