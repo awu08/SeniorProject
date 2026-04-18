@@ -28,6 +28,6 @@ if prompt := st.chat_input("How can I help you?"):
             "Ask guiding questions and give hints.\n\n"
             + prompt
         )
-        st.markdown(response.text)
+        st.markdown(response.text + "HI")
 
     st.session_state.messages.append({"role": "assistant", "content": response.text})
