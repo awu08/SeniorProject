@@ -4,7 +4,7 @@ import os
 
 # 1. Setup Gemini
 genai.configure(api_key="AIzaSyC-FIeSGx8vlpEMKz37yl9qF3U14s_Ghv4")
-model = genai.GenerativeModel('gemini-1.5-flash-latest')
+model = genai.GenerativeModel('gemini-1.5-flash')
 
 # 2. Streamlit UI Config
 st.set_page_config(page_title="Gemini Chat", layout="centered")
