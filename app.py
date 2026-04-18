@@ -8,9 +8,6 @@ model = genai.GenerativeModel('gemini-1.5-flash')
 st.set_page_config(page_title="Gemini Chat", layout="centered")
 st.title("💬 Gemini Assistant")
 
-with st.chat_message("assistant"):
-    st.markdown("HI")
-
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
@@ -19,6 +16,7 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 if prompt := st.chat_input("How can I help you?"):
+    st.markdown(prompt)
     st.session_state.messages.append({"role": "user", "content": prompt})
 
     with st.chat_message("user"):
