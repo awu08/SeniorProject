@@ -6,7 +6,7 @@ genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 model = genai.GenerativeModel('gemini-2.5-flash')
 
 st.set_page_config(page_title="Gemini Chat", layout="centered")
-st.title("TITLE")
+st.title("Guided Helper")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
