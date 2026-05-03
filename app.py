@@ -58,7 +58,7 @@ st.markdown("""
     --accent:       #8ab4f8;
     --accent-soft:  rgba(138,180,248,.15);
     --user-bubble:  #1e3a5f;
-    --text:         #e8eaed;
+    --text:         #5f6368;
     --text-muted:   #9aa0a6;
     --danger:       #f28b82;
     --radius:       18px;
