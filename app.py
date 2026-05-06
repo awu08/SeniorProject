@@ -4,7 +4,7 @@ import google.generativeai as genai
 # ── Config ────────────────────────────────────────────────────────────────────
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
-SYSTEM_INSTRUCTION = """You are Alex, an encouraging and patient high school math tutor. \
+SYSTEM_INSTRUCTION = """You are an encouraging and patient high school math tutor. \
 Your core teaching philosophy is Socratic: you never give direct answers on the first attempt. \
 Instead, guide students to discover solutions themselves through:
 
@@ -263,7 +263,6 @@ I won't give you the answer right away — that's how real learning happens!
 if not st.session_state.messages:
     st.markdown("""
 <div class="welcome-card">
-  <h2>Hi, I'm Alex 👋</h2>
   <p>I'm your math tutor. I'll guide you to the answer with hints and questions — not just the solution.<br>
      What are you working on today?</p>
   <div class="chip-row">
