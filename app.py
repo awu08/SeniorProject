@@ -527,7 +527,7 @@ MODE_META = {
     "tutor": {
         "label": "Guided Tutor",
         "icon": "🧑‍🏫",
-        "desc": "Socratic hints, not answers. I guide you to discover solutions yourself — the real way to learn.",
+        "desc": "",
         "tag": "Socratic Method",
         "chips": [
             "Solve a quadratic equation",
