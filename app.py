@@ -418,6 +418,46 @@ footer { visibility: hidden; }
 .related-item:last-child { border-bottom: none; }
 .related-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent-2); flex-shrink: 0; }
 
+/* ── Clickable logo/home button in chat header ── */
+.logo-btn-wrap .stButton > button {
+    background: transparent !important;
+    border: none !important;
+    padding: 24px 0 12px !important;
+    font-family: var(--font-display) !important;
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    color: var(--text) !important;
+    border-radius: 0 !important;
+    text-align: left !important;
+    box-shadow: none !important;
+    letter-spacing: -.01em !important;
+    transition: color .15s !important;
+    width: 100% !important;
+}
+.logo-btn-wrap .stButton > button:hover {
+    color: var(--accent) !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Mode badge floated right in the header row */
+.mode-badge-right {
+    margin-top: 24px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: .75rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    background: var(--surface-hi);
+    font-family: var(--font-mono);
+    display: inline-block;
+    white-space: nowrap;
+    float: right;
+}
+.header-rule { margin: 0 0 6px !important; }
+
 hr { border-color: var(--border) !important; margin: 8px 0 !important; }
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
@@ -654,16 +694,16 @@ else:
         hist_count = len(st.session_state.messages)
         st.caption(f"Messages: {hist_count} · keeping last {MAX_HISTORY_PAIRS*2}")
 
-    # ── Header ────────────────────────────────────────────────────────────────
-    st.markdown(f"""
-<div class="gh-header">
-  <div class="gh-logo">{meta['icon']}</div>
-  <div>
-    <p class="gh-title">Guided Helper</p>
-    <p class="gh-sub">Your personal high school math tutor</p>
-  </div>
-  <span class="mode-badge">{meta['label']}</span>
-</div>""", unsafe_allow_html=True)
+    # ── Header (logo button navigates home) ──────────────────────────────────
+    st.markdown("<div class='logo-btn-wrap'>", unsafe_allow_html=True)
+    hcol1, hcol2 = st.columns([6, 2])
+    with hcol1:
+        if st.button("📐  Guided Helper", key="home_logo_btn"):
+            st.session_state.screen = "home"
+            st.rerun()
+    with hcol2:
+        st.markdown(f"<div class='mode-badge-right'>{meta['label']}</div>", unsafe_allow_html=True)
+    st.markdown("</div><hr class='header-rule'>", unsafe_allow_html=True)
 
     # ── Welcome card ──────────────────────────────────────────────────────────
     if not st.session_state.messages:
