@@ -527,7 +527,7 @@ MODE_META = {
     "tutor": {
         "label": "Guided Tutor",
         "icon": "🧑‍🏫",
-        "desc": "Build the critical thinking math demands. Break down word problems, see math's logic, and develop the basics that create higher math.",
+        "desc": "Build the critical thinking math demands. Learn to break down word problems, see math's logic, and solve higher math with the basics.",
         "tag": "Socratic Method",
         "chips": [
             "Solve a quadratic equation",
