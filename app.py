@@ -582,7 +582,7 @@ if st.session_state.screen == "home":
     # Hero
     st.markdown("""
 <div class="home-hero">
-  <h1>Learn math the<br><em>right way</em></h1>
+  <h1>Learn to Apply Math and Yourself</h1>
   <p>Choose a mode below to get started. Guided Tutor teaches through discovery,
      Practice Mode builds skills with adaptive drills, and Concept Explainer
      gives you deep, clear explanations.</p>
