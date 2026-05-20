@@ -527,7 +527,7 @@ MODE_META = {
     "tutor": {
         "label": "Guided Tutor",
         "icon": "🧑‍🏫",
-        "desc": "Build the critical thinking skills math actually demands. Learn to break down word problems visually, spot the logic in proofs, and develop the intuition and basics that higher math depends on.",
+        "desc": "Build the critical thinking math demands. Learn to break down word problems visually, spot the logic in proofs, and develop the basics that create higher math.",
         "tag": "Socratic Method",
         "chips": [
             "Solve a quadratic equation",
