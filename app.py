@@ -527,7 +527,7 @@ MODE_META = {
     "tutor": {
         "label": "Guided Tutor",
         "icon": "🧑‍🏫",
-        "desc": "",
+        "desc": "Build the critical thinking skills math actually demands. Learn to break down word problems visually, spot the logic in proofs, and develop the intuition and basics that higher math depends on.",
         "tag": "Socratic Method",
         "chips": [
             "Solve a quadratic equation",
@@ -540,7 +540,7 @@ MODE_META = {
     "practice": {
         "label": "Practice Mode",
         "icon": "🎯",
-        "desc": "Level-up with generated problems. I'll tailor difficulty to you and give instant feedback.",
+        "desc": "Get a full grasp with generated problems that format tests: difficulty and question types that are tailored to you with feedback.",
         "tag": "Adaptive Drills",
         "chips": [
             "Practice quadratic equations",
@@ -553,7 +553,7 @@ MODE_META = {
     "explain": {
         "label": "Concept Explainer",
         "icon": "💡",
-        "desc": "Deep dives into any math concept with plain-language explanations, analogies, and examples.",
+        "desc": "Deep dives into any math concept with plain-language explanations, analogies, visualizations, and examples.",
         "tag": "Deep Dives",
         "chips": [
             "What is a derivative?",
@@ -583,9 +583,8 @@ if st.session_state.screen == "home":
     st.markdown("""
 <div class="home-hero">
   <h1>Learn to Apply Math and Yourself</h1>
-  <p>Choose a mode below to get started. Guided Tutor teaches through discovery,
-     Practice Mode builds skills with adaptive drills, and Concept Explainer
-     gives you deep, clear explanations.</p>
+  <p>Choose a mode below to get started. Guided Tutor internatlizes subjects through (potentially frustrating) discovery,
+     Practice Mode builds (test-taking) skills with adaptive drills, and Concept Explainer gives you clear, visualizing explanations.</p>
 </div>""", unsafe_allow_html=True)
 
     # Mode cards — rendered as st.columns with clickable buttons underneath
