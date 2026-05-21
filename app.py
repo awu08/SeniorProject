@@ -100,9 +100,9 @@ st.markdown("""
     --accent-2:     #a78bfa;
     --accent-soft:  rgba(126,184,255,.12);
     --user-bubble:  #1a2f4a;
-    --text:         #c9d1e0;
-    --text-muted:   #6b7591;
-    --text-dim:     #9aa3b8;
+    --text:         #1a1d27;
+    --text-muted:   #3a3f52;
+    --text-dim:     #4a5168;
     --success:      #6ee7b7;
     --warn:         #fbbf24;
     --radius:       16px;
