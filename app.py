@@ -467,12 +467,12 @@ hr { border-color: var(--border) !important; margin: 8px 0 !important; }
 
 # ── Session State ─────────────────────────────────────────────────────────────
 defaults = {
-    "screen": "home",          # "home" | "chat"
-    "mode": None,              # "tutor" | "practice" | "explain"
+    "screen": "home",
+    "mode": None,
     "messages": [],
     "pending_prompt": None,
-    "topic_data": None,        # dict from topic analyzer
-    "analyze_topics": False,   # flag to trigger analysis
+    "topic_data": None,
+    "analyze_topics": False,
 }
 for k, v in defaults.items():
     if k not in st.session_state:
@@ -504,15 +504,13 @@ def build_gemini_history(messages: list) -> list:
 def analyze_topics(messages: list) -> dict | None:
     if not messages:
         return None
-    # Build a short conversation summary for the analyzer
     convo = "\n".join(
         f"{'Student' if m['role'] == 'user' else 'Tutor'}: {m['content'][:300]}"
-        for m in messages[-6:]  # last 3 pairs
+        for m in messages[-6:]
     )
     try:
         resp = analyzer_model.generate_content(convo)
         raw = resp.text.strip()
-        # Strip any accidental markdown fences
         raw = re.sub(r"^```[a-z]*\n?", "", raw)
         raw = re.sub(r"```$", "", raw).strip()
         data = json.loads(raw)
@@ -569,7 +567,6 @@ MODE_META = {
 #  HOME SCREEN
 # ════════════════════════════════════════════════════════════════════════════════
 if st.session_state.screen == "home":
-    # Header
     st.markdown("""
 <div class="gh-header">
   <div class="gh-logo">📐</div>
@@ -579,15 +576,14 @@ if st.session_state.screen == "home":
   </div>
 </div>""", unsafe_allow_html=True)
 
-    # Hero
     st.markdown("""
 <div class="home-hero">
   <h1>Learn to Apply Math and Yourself</h1>
-  <p>Choose a mode below to get started. Guided Tutor internatlizes subjects through (potentially frustrating) discovery,
-     Practice Mode builds (test-taking) skills with adaptive drills, and Concept Explainer gives you clear, visualizing explanations.</p>
+  <p>Choose a mode below to get started. Guided Tutor internalizes subjects through discovery,
+     Practice Mode builds test-taking skills with adaptive drills, and Concept Explainer
+     gives you clear, visualizing explanations.</p>
 </div>""", unsafe_allow_html=True)
 
-    # Mode cards — rendered as st.columns with clickable buttons underneath
     col1, col2, col3 = st.columns(3)
     cols = [col1, col2, col3]
     modes = ["tutor", "practice", "explain"]
@@ -609,7 +605,6 @@ if st.session_state.screen == "home":
                 st.session_state.topic_data = None
                 st.rerun()
 
-    # Topics footer
     st.markdown("""
 <div class="home-topics">
   <p>Covers all standard high school math topics</p>
@@ -634,7 +629,7 @@ else:
 
     # ── Sidebar ───────────────────────────────────────────────────────────────
     with st.sidebar:
-        st.markdown(f"<div class='topic-panel-header'>🔭 Topic Radar</div>", unsafe_allow_html=True)
+        st.markdown("<div class='topic-panel-header'>🔭 Topic Radar</div>", unsafe_allow_html=True)
         st.caption("Updates as you chat")
 
         td = st.session_state.topic_data
@@ -731,7 +726,7 @@ else:
 </div>""", unsafe_allow_html=True)
 
     # ── Chat input ────────────────────────────────────────────────────────────
-    user_input = st.chat_input(f"Ask me a math question…")
+    user_input = st.chat_input("Ask me a math question…")
 
     if user_input:
         st.session_state.messages.append({"role": "user", "content": user_input})
@@ -740,14 +735,8 @@ else:
         st.rerun()
 
     # ── Generate response ─────────────────────────────────────────────────────
+    # NOTE: No duplicate user bubble here — the history loop above already rendered it.
     if st.session_state.pending_prompt:
-        last_user = st.session_state.messages[-1]
-        st.markdown(f"""
-<div class="msg-row user">
-  <div class="avatar user">🧑</div>
-  <div class="bubble user">{last_user['content']}</div>
-</div>""", unsafe_allow_html=True)
-
         thinking_ph = st.empty()
         thinking_ph.markdown("""
 <div class="msg-row">
