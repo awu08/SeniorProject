@@ -81,7 +81,7 @@ MAX_HISTORY_PAIRS = 10
 # ── Page Setup ────────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Guided Helper · Math Tutor",
-    page_icon="📐",
+    page_icon=None,
     layout="centered",
     initial_sidebar_state="collapsed",
 )
@@ -140,7 +140,8 @@ footer { visibility: hidden; }
     background: linear-gradient(135deg, #7eb8ff 0%, #a78bfa 60%, #fb7185 100%);
     border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 20px; flex-shrink: 0;
+    font-size: 11px; font-weight: 700; font-family: var(--font-mono);
+    color: #fff; letter-spacing: .03em; flex-shrink: 0;
 }
 .gh-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--text); margin: 0; }
 .gh-sub   { font-size: .78rem; color: var(--text-muted); margin: 2px 0 0; }
@@ -232,7 +233,8 @@ footer { visibility: hidden; }
     width: 44px; height: 44px;
     border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
+    font-size: 10px; font-weight: 700; font-family: var(--font-mono);
+    letter-spacing: .04em; text-transform: uppercase;
     margin-bottom: 16px;
 }
 .mode-icon.tutor    { background: rgba(126,184,255,.15); }
@@ -302,7 +304,8 @@ footer { visibility: hidden; }
 .avatar {
     width: 30px; height: 30px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 14px; flex-shrink: 0; margin-top: 3px;
+    font-size: 9px; font-weight: 700; font-family: var(--font-mono);
+    letter-spacing: .03em; flex-shrink: 0; margin-top: 3px;
 }
 .avatar.bot  { background: linear-gradient(135deg,#7eb8ff,#a78bfa); }
 .avatar.user { background: var(--surface-hi); border: 1px solid var(--border); }
@@ -524,6 +527,7 @@ def analyze_topics(messages: list) -> dict | None:
 MODE_META = {
     "tutor": {
         "label": "Guided Tutor",
+        "icon": "Tutor",
         "desc": "Build the critical thinking math demands. Learn to break down word problems, see math's logic, and solve higher math with the basics.",
         "tag": "Socratic Method",
         "chips": [
@@ -536,6 +540,7 @@ MODE_META = {
     },
     "practice": {
         "label": "Practice Mode",
+        "icon": "Practice",
         "desc": "Get a full grasp with generated problems that format tests: difficulty and question types that are tailored to you with feedback.",
         "tag": "Adaptive Drills",
         "chips": [
@@ -548,6 +553,7 @@ MODE_META = {
     },
     "explain": {
         "label": "Concept Explainer",
+        "icon": "Explain",
         "desc": "Deep dives into any math concept with plain-language explanations, analogies, visualizations, and examples.",
         "tag": "Deep Dives",
         "chips": [
@@ -566,7 +572,7 @@ MODE_META = {
 if st.session_state.screen == "home":
     st.markdown("""
 <div class="gh-header">
-  <div class="gh-logo">📐</div>
+  <div class="gh-logo">GH</div>
   <div>
     <p class="gh-title">Guided Helper</p>
     <p class="gh-sub">Your personal math tutor</p>
@@ -626,7 +632,7 @@ else:
 
     # ── Sidebar ───────────────────────────────────────────────────────────────
     with st.sidebar:
-        st.markdown("<div class='topic-panel-header'>🔭 Topic Radar</div>", unsafe_allow_html=True)
+        st.markdown("<div class='topic-panel-header'>Topic Radar</div>", unsafe_allow_html=True)
         st.caption("Updates as you chat")
 
         td = st.session_state.topic_data
@@ -644,7 +650,7 @@ else:
                 nodes_html = ""
                 for i, c in enumerate(concepts):
                     cls = "primary" if i == 0 else ""
-                    nodes_html += f"<span class='concept-node {cls}'>{'◆ ' if i==0 else ''}{c}</span>"
+                    nodes_html += f"<span class='concept-node {cls}'>{c}</span>"
                 st.markdown(f"<div class='concept-map'>{nodes_html}</div>", unsafe_allow_html=True)
 
             related = td.get("related_topics", [])
@@ -658,25 +664,25 @@ else:
         else:
             st.markdown("""
 <div style='background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;margin-top:8px;'>
-  <div style='font-size:1.6rem;margin-bottom:8px;opacity:.4;'>🔭</div>
+  <div style='font-size:.75rem;font-family:var(--font-mono);color:var(--text-muted);margin-bottom:8px;opacity:.5;'>[ no topic yet ]</div>
   <div style='font-size:.8rem;color:var(--text-muted);line-height:1.6;'>
     Topics you're working on will appear here as a concept map.
   </div>
 </div>""", unsafe_allow_html=True)
 
         st.divider()
-        st.markdown("### 📚 Topics Covered")
+        st.markdown("### Topics Covered")
         for t in ["Arithmetic", "Algebra I & II", "Geometry", "Trigonometry", "Pre-Calculus", "Statistics", "AP Calc AB/BC"]:
             st.markdown(f"<span style='font-size:.82rem;color:var(--text-muted)'>· {t}</span>", unsafe_allow_html=True)
         st.divider()
 
         col_a, col_b = st.columns(2)
         with col_a:
-            if st.button("🏠 Home", use_container_width=True):
+            if st.button("Home", use_container_width=True):
                 st.session_state.screen = "home"
                 st.rerun()
         with col_b:
-            if st.button("🗑️ Clear", use_container_width=True):
+            if st.button("Clear", use_container_width=True):
                 st.session_state.messages = []
                 st.session_state.pending_prompt = None
                 st.session_state.topic_data = None
@@ -689,7 +695,7 @@ else:
     st.markdown("<div class='logo-btn-wrap'>", unsafe_allow_html=True)
     hcol1, hcol2 = st.columns([6, 2])
     with hcol1:
-        if st.button("📐  Guided Helper", key="home_logo_btn"):
+        if st.button("Guided Helper", key="home_logo_btn"):
             st.session_state.screen = "home"
             st.rerun()
     with hcol2:
@@ -712,13 +718,13 @@ else:
         if role == "user":
             st.markdown(f"""
 <div class="msg-row user">
-  <div class="avatar user">🧑</div>
+  <div class="avatar user">You</div>
   <div class="bubble user">{content}</div>
 </div>""", unsafe_allow_html=True)
         else:
             st.markdown(f"""
 <div class="msg-row">
-  <div class="avatar bot">✨</div>
+  <div class="avatar bot">AI</div>
   <div class="bubble bot">{content}</div>
 </div>""", unsafe_allow_html=True)
 
@@ -737,7 +743,7 @@ else:
         thinking_ph = st.empty()
         thinking_ph.markdown("""
 <div class="msg-row">
-  <div class="avatar bot">✨</div>
+  <div class="avatar bot">AI</div>
   <div class="bubble bot">
     <div class="thinking-dots"><span></span><span></span><span></span></div>
   </div>
@@ -750,11 +756,11 @@ else:
             response = chat.send_message(st.session_state.pending_prompt)
             reply = response.text if response.text else "I didn't catch that — could you rephrase?"
         except Exception as e:
-            reply = f"⚠️ Something went wrong: `{e}`"
+            reply = f"Error: `{e}`"
 
         thinking_ph.markdown(f"""
 <div class="msg-row">
-  <div class="avatar bot">✨</div>
+  <div class="avatar bot">AI</div>
   <div class="bubble bot">{reply}</div>
 </div>""", unsafe_allow_html=True)
 
