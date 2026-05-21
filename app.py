@@ -100,7 +100,7 @@ st.markdown("""
     --accent-2:     #a78bfa;
     --accent-soft:  rgba(126,184,255,.12);
     --user-bubble:  #1a2f4a;
-    --text:         #c9d1e0;
+    --text:         #7eb8ff;
     --text-muted:   #6b7591;
     --text-dim:     #9aa3b8;
     --success:      #6ee7b7;
