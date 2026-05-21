@@ -524,7 +524,6 @@ def analyze_topics(messages: list) -> dict | None:
 MODE_META = {
     "tutor": {
         "label": "Guided Tutor",
-        "icon": "🧑‍🏫",
         "desc": "Build the critical thinking math demands. Learn to break down word problems, see math's logic, and solve higher math with the basics.",
         "tag": "Socratic Method",
         "chips": [
@@ -537,7 +536,6 @@ MODE_META = {
     },
     "practice": {
         "label": "Practice Mode",
-        "icon": "🎯",
         "desc": "Get a full grasp with generated problems that format tests: difficulty and question types that are tailored to you with feedback.",
         "tag": "Adaptive Drills",
         "chips": [
@@ -550,7 +548,6 @@ MODE_META = {
     },
     "explain": {
         "label": "Concept Explainer",
-        "icon": "💡",
         "desc": "Deep dives into any math concept with plain-language explanations, analogies, visualizations, and examples.",
         "tag": "Deep Dives",
         "chips": [
